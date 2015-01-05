@@ -1,0 +1,23 @@
+{
+  "name": "ado/ado-plugin",
+  "description": "Installs dependendencies needed for the Arrested DevOps website",
+  "license": "GPL-2.0+",
+  "authors": [
+      {
+        "name": "Matt Stratton",
+        "email": "matt.stratton@gmail.com",
+        "homepage": "https://github.com/mattstratton"
+      }
+  ],
+  "keywords": ["wordpress", "plugin", "metabox"],
+  "homepage": "https://github.com/arresteddevops/ado-plugin",
+  "type": "wordpress-plugin",
+  "support": {
+      "issues": "https://github.com/arresteddevops/ado-plugin/issues",
+      "source": "https://github.com/arresteddevops/ado-plugin"
+  },
+  "require": {
+    "php": ">=5.3.2",
+    "composer/installers": "v1.0.6"
+  }
+}
