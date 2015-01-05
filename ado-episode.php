@@ -62,4 +62,98 @@ register_taxonomy_for_object_type( 'post_tag', 'episode' );
 
   // adding the function to the Wordpress init
   add_action( 'init', 'ado_episode');
+
+
+ // Metaboxes code
+ 
+ if ( file_exists(  plugin_dir_path( '/cmb2/init.php' ) ) ) {
+  require_once  plugin_dir_path( '/cmb2/init.php' );
+} elseif ( file_exists(  plugin_dir_path( '/CMB2/init.php') ) ) {
+  require_once  plugin_dir_path( '/CMB2/init.php' );
+}
+
+add_filter( 'cmb2_meta_boxes', 'cmb2_sample_metaboxes' );
+/**
+ * Define the metabox and field configurations.
+ *
+ * @param  array $meta_boxes
+ * @return array
+ */
+function cmb2_sample_metaboxes( array $meta_boxes ) {
+
+  // Start with an underscore to hide fields from custom fields list
+  $prefix = '_cmb2_';
+
+  $meta_boxes['episode_metabox'] = array(
+    'id'            => 'episode_metabox',
+    'title'         => __( 'Episode Information', 'cmb2'),
+    'object_types'  => array('ado_episode', ),
+    'context'       => 'normal',
+    'priority'      => 'high',
+    'show_names'    => true,
+    'fields'        => array(
+        array(
+          'name'    => __( 'Summary', 'cmb2' ),
+          'desc'    => __( 'A one paragraph summary of the episode. Used in podcast summary, feed, and also on the short display on the homepage', 'cmb2' ),
+          'id'      => $prefix . 'ado_summary',
+          'type'    => 'wysiwyg',
+          'options' => array( 'textarea_rows' => 10, ),
+      ), 
+        array(
+          'name'    => __( 'Show Notes', 'cmb2' ),
+          'desc'    => __( 'All of the show notes. Go crazy.', 'cmb2' ),
+          'id'      => $prefix . 'ado_show_notes',
+          'type'    => 'wysiwyg',
+          'options' => array( 'textarea_rows' => 10, ),
+      ),                     
+        array(
+          'name'    => __( 'Check Outs', 'cmb2' ),
+          'desc'    => __( 'Check outs for each person. You will have to write the UL list stuff by hand for now', 'cmb2' ),
+          'id'      => $prefix . 'ado_checkouts',
+          'type'    => 'wysiwyg',
+          'options' => array( 'textarea_rows' => 5, ),
+        ),
+        array(
+          'name'    => __( 'Sponsor 1 Text', 'cmb2' ),
+          'desc'    => __( 'The text for Sponsor 1 ad. Please make sure to include inline links!', 'cmb2' ),
+          'id'      => $prefix . 'ado_sponsor_1_text',
+          'type'    => 'wysiwyg',
+          'options' => array( 'textarea_rows' => 5, ),
+        ),
+        array(
+          'name' => __( 'Sponsor 1 Banner', 'cmb2' ),
+          'desc' => __( 'Upload the banner image for Sponsor 1 for this episode (you can also choose it from one already uploaded)', 'cmb2' ),
+          'id'   => $prefix . 'sponsor_1_banner',
+          'type' => 'file',
+        ),
+        array(
+          'name' => __( 'Sponsor 1 URL', 'cmb2' ),
+          'id'   => $prefix . 'ado_sponsor_1_url',
+          'type' => 'text_url',
+          // 'protocols' => array( 'http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet' ), // Array of allowed protocols
+        ),
+        array(
+          'name'    => __( 'Sponsor 2 Text', 'cmb2' ),
+          'desc'    => __( 'The text for Sponsor 2 ad. Please make sure to include inline links!', 'cmb2' ),
+          'id'      => $prefix . 'ado_sponsor_2_text',
+          'type'    => 'wysiwyg',
+          'options' => array( 'textarea_rows' => 5, ),
+        ),
+        array(
+          'name' => __( 'Sponsor 2 Banner', 'cmb2' ),
+          'desc' => __( 'Upload the banner image for Sponsor 2 for this episode (you can also choose it from one already uploaded)', 'cmb2' ),
+          'id'   => $prefix . 'ado_sponsor_2_banner',
+          'type' => 'file',
+        ),
+        array(
+          'name' => __( 'Sponsor 2 URL', 'cmb2' ),
+          'id'   => $prefix . 'ado_sponsor_2_url',
+          'type' => 'text_url',
+          // 'protocols' => array( 'http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet' ), // Array of allowed protocols
+        ),
+    ),
+  );
+  return $meta_boxes;
+}
+
 ?>
