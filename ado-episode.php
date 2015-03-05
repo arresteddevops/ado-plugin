@@ -3,7 +3,7 @@
    Plugin Name: Arrested DevOps Episodes
    Plugin URI: http://www.arresteddevops.com.com
    Description: Creates custom post types for ADO Episode
-   Version: 1.2
+   Version: 1.3
    Author: Matt Stratton
    Author URI: http://mattstratton.com
    License: GPL2
