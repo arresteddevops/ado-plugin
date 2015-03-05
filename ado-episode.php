@@ -93,6 +93,12 @@ function cmb2_sample_metaboxes( array $meta_boxes ) {
     'show_names'    => true,
     'fields'        => array(
         array(
+          'name' => __( 'Episode Number', 'cmb2' ),
+          'desc' => 'The episode number. DO NOT INCLUDE SPACES OR DASHES',
+          'id'   => $prefix . 'ado_episode_number',
+          'type' => 'textarea_small',
+        ),
+        array(
           'name'    => __( 'Summary', 'cmb2' ),
           'desc'    => __( 'A one paragraph summary of the episode. Used in podcast summary, feed, and also on the short display on the homepage', 'cmb2' ),
           'id'      => $prefix . 'ado_summary',
@@ -155,5 +161,13 @@ function cmb2_sample_metaboxes( array $meta_boxes ) {
   );
   return $meta_boxes;
 }
+
+// Needed to allow line breaks in user bios
+remove_filter('pre_user_description', 'wp_filter_kses');
+add_filter('pre_user_description', 'wp_filter_post_kses');
+add_filter('pre_user_description', 'wptexturize');
+add_filter('pre_user_description', 'wpautop');
+add_filter('pre_user_description', 'convert_chars');
+add_filter('pre_user_description', 'balanceTags', 50);
 
 ?>
